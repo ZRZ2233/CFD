@@ -1,11 +1,11 @@
 #include<algorithm>
-#include"function.h"
+//#include"function.h"
 #include<iostream>
 
 using namespace std;
 
-//¶şÎ¬Îåµã¾ØÕóILU·Ö½â£¬²¢½«Òò×ÓÓ¦ÓÃÓÚ¸üĞÂ·½³ÌµÄÒ»´Îµü´ú¡£
-//a,b,c,d,e´ú±í5¶Ô½Ç¾ØÕó´ÓÏÂµ½ÉÏÎåÌõ¶Ô½ÇÏß
+//äºŒç»´äº”ç‚¹çŸ©é˜µILUåˆ†è§£ï¼Œå¹¶å°†å› å­åº”ç”¨äºæ›´æ–°æ–¹ç¨‹çš„ä¸€æ¬¡è¿­ä»£ã€‚
+//a,b,c,d,eä»£è¡¨5å¯¹è§’çŸ©é˜µä»ä¸‹åˆ°ä¸Šäº”æ¡å¯¹è§’çº¿
 void ilu5(int m, int n, double* a, double* b, double* c, double* d, double* e, double* r, double* x)
 {
 
@@ -47,7 +47,7 @@ void ilu5(int m, int n, double* a, double* b, double* c, double* d, double* e, d
     }
 }
 
-//¶şÎ¬Îåµã¾ØÕóSIP-ILU·Ö½â£¬²¢½«Òò×ÓÓ¦ÓÃÓÚ¸üĞÂ·½³ÌµÄÒ»´Îµü´ú¡£
+//äºŒç»´äº”ç‚¹çŸ©é˜µSIP-ILUåˆ†è§£ï¼Œå¹¶å°†å› å­åº”ç”¨äºæ›´æ–°æ–¹ç¨‹çš„ä¸€æ¬¡è¿­ä»£ã€‚
 void sip5(int m, int n, double alf, double* a, double* b, double* c, double* d, double* e, double* r, double* x)
 {
     if (alf == 0 || (m <= 3 || n <= 3))
@@ -96,7 +96,7 @@ void sip5(int m, int n, double alf, double* a, double* b, double* c, double* d, 
     }
 }
 
-//µ÷ÕûÎåµã¾ØÕóµÄ¶Ô½ÇÏß£¬ÒÔÂú×ãÓë¶Ô½ÇÏßÓÅÊÆÏà¹ØµÄÊôĞÔ
+//è°ƒæ•´äº”ç‚¹çŸ©é˜µçš„å¯¹è§’çº¿ï¼Œä»¥æ»¡è¶³ä¸å¯¹è§’çº¿ä¼˜åŠ¿ç›¸å…³çš„å±æ€§
 void adjustM(int m, int n, double* matrix, double rf)
 {
     int a = n * 5;
@@ -109,13 +109,13 @@ void adjustM(int m, int n, double* matrix, double rf)
     }
 }
 
-//m,n×¢Òâ----------------------À´×ÔÍøÉÏ-----Îó²îÔÚ2%×óÓÒ----------
+//m,næ³¨æ„----------------------æ¥è‡ªç½‘ä¸Š-----è¯¯å·®åœ¨2%å·¦å³----------
 int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, double* x, double* r, int nn, int mm)
 {
 	//int m, int n
 	int n = nn * mm - 1;
 	int m = mm-1;
-	//Çó½âÈçÏÂĞÎÊ½¾ØÕó£º
+	//æ±‚è§£å¦‚ä¸‹å½¢å¼çŸ©é˜µï¼š
 	//AC0	AR0			ARR0						
 	//AL1	AC1	AR1			ARR1					
 	//	    AL2	AC2	AR2			ARR2				
@@ -133,9 +133,9 @@ int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, doub
 	double* UR, * URR;
 	//double* RES, * y;      
 	double* RES;                //delta
-	double RESN = 0;            //ÊÕÁ²ÅĞ¾İ
-	int MAXITER = 1000;         //×î´óÑ­»·´ÎÊı
-	int ITER;                  //¼ÆÊıÆ÷
+	double RESN = 0;            //æ”¶æ•›åˆ¤æ®
+	int MAXITER = 1000;         //æœ€å¤§å¾ªç¯æ¬¡æ•°
+	int ITER;                  //è®¡æ•°å™¨
 	LLL = new double[n + 1];
 	LL = new double[n + 1];
 	LC = new double[n + 1];
@@ -150,7 +150,7 @@ int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, doub
 		URR[i] = 0;
 		RES[i] = 0;
 	}
-	for (int i = 0; i <= n; i++)//Ïà±ÈsolpsÄÚµÄÃ»ÓĞ¶ÔxµÄ¸Ä±äÁË
+	for (int i = 0; i <= n; i++)//ç›¸æ¯”solpså†…çš„æ²¡æœ‰å¯¹xçš„æ”¹å˜äº†
 	{
 		if (i >= m) {
 			LLL[i] = ALL[i] / (1 + a * UR[i - m]);
@@ -235,7 +235,7 @@ int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, doub
 	return ITER > MAXITER ? -1 : 1;
 }
 
-//½áºÏÍøÉÏÄÇ¸öºÍsolpsÄÚÖÃµÄ£¬ºÍEigenËãµÄ½á¹ûÒ»Ñù
+//ç»“åˆç½‘ä¸Šé‚£ä¸ªå’Œsolpså†…ç½®çš„ï¼Œå’ŒEigenç®—çš„ç»“æœä¸€æ ·
 //void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, double* e, double* r, double* x)
 //{
 //	double p1 = 0;
@@ -246,8 +246,8 @@ int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, doub
 //	double* dcopy = new double[n * m];
 //	double* ecopy = new double[n * m];
 //	double* res = new double[n * m];
-//	int count = 0;      //Ñ­»·¼ÆÊı
-//	double con_jud = 0; //ÊÕÁ²ÅĞ¶Ï
+//	int count = 0;      //å¾ªç¯è®¡æ•°
+//	double con_jud = 0; //æ”¶æ•›åˆ¤æ–­
 //	for (int i = 0; i < n * m; i++)
 //	{
 //		acopy[i] = a[i];
@@ -287,25 +287,25 @@ int SIPsolver(double* ALL, double* AL, double* AC, double* AR, double* ARR, doub
 //	do
 //	{
 //		con_jud = 0;
-//		for (int i = 0; i < n * m; i++) //ÊÕÁ²ÅĞ¶Ï
+//		for (int i = 0; i < n * m; i++) //æ”¶æ•›åˆ¤æ–­
 //		{
 //			res[i] = r[i] - (a[i] * (i - m >= 0 ? x[i - m] : 0) + b[i] * (i - 1 >= 0 ? x[i - 1] : 0) + c[i] * x[i] + d[i] * (i + 1 <= n * m - 1 ? x[i + 1] : 0) + e[i] * (i + m <= n * m - 1 ? x[i + m] : 0));
 //			con_jud += abs(res[i]);
 //		}
 //
-//		for (int i = 0; i < n * m; i++)  //¸üĞÂ²îÖµ
+//		for (int i = 0; i < n * m; i++)  //æ›´æ–°å·®å€¼
 //		{ 
 //			res[i] = (res[i] - (i - 1 >= 0 ? res[i - 1] : 0) * bcopy[i] - (i - m >= 0 ? res[i - m] : 0) * acopy[i]) / ccopy[i];
 //		}
 //
-//		for (int i = n * m - 1; i >= 0; i--)  //¸ù¾İ²îÖµ£¬¸üĞÂ½â
+//		for (int i = n * m - 1; i >= 0; i--)  //æ ¹æ®å·®å€¼ï¼Œæ›´æ–°è§£
 //		{
 //			x[i] = x[i] + (res[i] - (i + 1 <= n * m - 1 ? res[i + 1] : 0) * dcopy[i] - (i + m <= n * m - 1 ? res[i + m] : 0) * ecopy[i]);
 //		}
 //	} while (abs(con_jud) > 1E-6 && count < 1000);
 //}
 
-//¸ù¾İÉÏÒ»¸ö½øÒ»²½¸ü¸Ä£¬¸´ÖÆ¸ÄÎª¸³0£¬¼Ó¿ìËÙ¶È
+//æ ¹æ®ä¸Šä¸€ä¸ªè¿›ä¸€æ­¥æ›´æ”¹ï¼Œå¤åˆ¶æ”¹ä¸ºèµ‹0ï¼ŒåŠ å¿«é€Ÿåº¦
 void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, double* e, double* r, double* x)
 {
 	double p1 = 0;
@@ -316,8 +316,8 @@ void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, d
 	double* dcopy = new double[n * m];
 	double* ecopy = new double[n * m];
 	double* res = new double[n * m];
-	int count = 0;      //Ñ­»·¼ÆÊı
-	double con_jud = 0; //ÊÕÁ²ÅĞ¶Ï
+	int count = 0;      //å¾ªç¯è®¡æ•°
+	double con_jud = 0; //æ”¶æ•›åˆ¤æ–­
 	for (int i = 0; i < n * m; i++)
 	{
 		acopy[i] = 0;
@@ -354,18 +354,18 @@ void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, d
 	do
 	{
 		con_jud = 0;
-		for (int i = 0; i < n * m; i++) //ÊÕÁ²ÅĞ¶Ï
+		for (int i = 0; i < n * m; i++) //æ”¶æ•›åˆ¤æ–­
 		{
 			res[i] = r[i] - (a[i] * (i - m >= 0 ? x[i - m] : 0) + b[i] * (i - 1 >= 0 ? x[i - 1] : 0) + c[i] * x[i] + d[i] * (i + 1 <= n * m - 1 ? x[i + 1] : 0) + e[i] * (i + m <= n * m - 1 ? x[i + m] : 0));
 			con_jud += abs(res[i]);
 		}
 
-		for (int i = 0; i < n * m; i++)  //¸üĞÂ²îÖµ
+		for (int i = 0; i < n * m; i++)  //æ›´æ–°å·®å€¼
 		{
 			res[i] = (res[i] - (i - 1 >= 0 ? res[i - 1] : 0) * bcopy[i] - (i - m >= 0 ? res[i - m] : 0) * acopy[i]) / ccopy[i];
 		}
 
-		for (int i = n * m - 1; i >= 0; i--)  //¸ù¾İ²îÖµ£¬¸üĞÂ½â
+		for (int i = n * m - 1; i >= 0; i--)  //æ ¹æ®å·®å€¼ï¼Œæ›´æ–°è§£
 		{
 			x[i] = x[i] + (res[i] - (i + 1 <= n * m - 1 ? res[i + 1] : 0) * dcopy[i] - (i + m <= n * m - 1 ? res[i + m] : 0) * ecopy[i]);
 		}
