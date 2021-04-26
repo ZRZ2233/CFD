@@ -340,7 +340,7 @@ void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, d
 		bcopy[i] = b[i] / (1 + alf * ecopy[i - 1]);
 		ccopy[i] = c[i] - bcopy[i] * dcopy[i - 1] + alf * bcopy[i] * ecopy[i - 1];
 		dcopy[i] = d[i] / ccopy[i];
-		ecopy[i] = (e[i] - alf * bcopy[i] * ecopy[i - 1]) / ecopy[i - 1];
+		ecopy[i] = (e[i] - alf * bcopy[i] * ecopy[i - 1]) / ccopy[i - 1];
 	}
 	for (int i = m; i <= m * n - 1; i++)
 	{
