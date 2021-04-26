@@ -369,5 +369,6 @@ void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, d
 		{
 			x[i] = x[i] + (res[i] - (i + 1 <= n * m - 1 ? res[i + 1] : 0) * dcopy[i] - (i + m <= n * m - 1 ? res[i + m] : 0) * ecopy[i]);
 		}
+		count++;
 	} while (abs(con_jud) > 1E-6 && count < 1000);
 }
