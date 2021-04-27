@@ -371,4 +371,11 @@ void sip(int m, int n, double alf, double* a, double* b, double* c, double* d, d
 		}
 		count++;
 	} while (abs(con_jud) > 1E-6 && count < 1000);
+	
+	delete[] acopy;
+	delete[] bcopy;
+	delete[] ccopy;
+	delete[] dcopy;
+	delete[] ecopy;
+	delete[] res;
 }
